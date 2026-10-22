@@ -33,6 +33,8 @@ Fonts are self-hosted through Fontsource. The website requires no credentials, I
 
 ## Deployment
 
-Deploy the contents of `dist/` to a static web host. The app assumes it is served from the domain root. No deployment has been performed as part of implementation.
+The GitHub Actions workflow in `.github/workflows/deploy-pages.yml` builds and publishes `dist/` on every push to `main`, and can also be run manually. In the repository’s **Settings → Pages**, choose **GitHub Actions** as the source. If the first deployment ran before enabling Pages, rerun it from the **Actions** tab.
+
+The expected Pages URL is https://triplea72.github.io/Ushna-Portfolio-Website/. Vite and all local asset references use relative paths, so photographs, fonts, the favicon, and the résumé also work under the repository subdirectory. The build can still be hosted at a domain root.
 
 The visual direction uses the [BeyondArtist](https://github.com/beyondtahir/beyondartist) design workflow and its stored Design Memory. See [design notes](docs/DESIGN.md) for decisions and asset provenance.

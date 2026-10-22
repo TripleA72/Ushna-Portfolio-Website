@@ -2,9 +2,12 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, Asterisk, Check, Copy, Download, Instagram, Menu, Plus, X } from 'lucide-react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import photos from './data/gallery.json'
+import photoData from './data/gallery.json'
 
 gsap.registerPlugin(ScrollTrigger)
+
+const assetUrl = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`
+const photos = photoData.map(photo => ({ ...photo, src: assetUrl(photo.src), thumbnail: assetUrl(photo.thumbnail) }))
 
 type Photo = typeof photos[number]
 type Category = 'All photographs' | 'Weddings' | 'Portraits' | 'Live music'
@@ -156,13 +159,13 @@ function App() {
 
       <section id="about" className="about" aria-labelledby="about-title">
         <div className="about-inner page-width">
-          <div className="about-photo" data-reveal><img src="/images/ushna-portrait.webp" alt="Black and white portrait of Ushna Mehtab in window light" loading="lazy" width="1600" height="975" /><span className="about-image-caption">On the other side of the lens.</span></div>
+          <div className="about-photo" data-reveal><img src={assetUrl('/images/ushna-portrait.webp')} alt="Black and white portrait of Ushna Mehtab in window light" loading="lazy" width="1600" height="975" /><span className="about-image-caption">On the other side of the lens.</span></div>
           <div className="about-copy" data-reveal>
             <span className="section-label">02 / The person</span>
             <h2 id="about-title">A storyteller.<br />An observer.<br /><em>A little curious.</em></h2>
             <p>I’m Ushna. I see stories in small gestures, unexpected light, and the moments that happen when no one is looking.</p>
             <p>With a background in film and television, I bring a love of storytelling to the way I see. Whether it’s a wedding, a portrait, or the energy of a live stage, I’m here for the feeling behind the frame.</p>
-            <details className="experience"><summary>My film & production background <Plus size={18} /></summary><div className="experience-list"><div><span>Mashion Pk</span><small>Assistant Producer</small></div><div><span>Media Voice Communication</span><small>Associate Producer · 2025</small></div><div><span>Teeli Co.</span><small>Line Producer · 2025</small></div><div><span>Karachi University</span><small>Film & TV · 2022–2025</small></div><a href="/documents/ushna-mehtab-resume.pdf" download>Download my résumé <Download size={15} /></a></div></details>
+            <details className="experience"><summary>My film & production background <Plus size={18} /></summary><div className="experience-list"><div><span>Mashion Pk</span><small>Assistant Producer</small></div><div><span>Media Voice Communication</span><small>Associate Producer · 2025</small></div><div><span>Teeli Co.</span><small>Line Producer · 2025</small></div><div><span>Karachi University</span><small>Film & TV · 2022–2025</small></div><a href={assetUrl('/documents/ushna-mehtab-resume.pdf')} download>Download my résumé <Download size={15} /></a></div></details>
             <a className="text-link" href={instagram} target="_blank" rel="noreferrer">A little more of my world <Instagram size={17} /><ArrowUpRight size={16} /></a>
           </div>
         </div>
